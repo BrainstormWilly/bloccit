@@ -1,5 +1,17 @@
 require 'random_data'
 
+
+post = Post.find_or_create_by!(
+  title: "Unique Post Title",
+  body: "Unique post body."
+)
+
+Comment.find_or_create_by!(
+  post: post,
+  body: "Unique Comment body"
+)
+
+
 50.times do
   Post.create!(
     title: RandomData.random_sentence,
