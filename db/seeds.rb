@@ -1,6 +1,6 @@
 require 'random_data'
 
-50.times do
+50.times do |i|
   Post.create!(
     title: RandomData.random_sentence,
     body: RandomData.random_paragraph
