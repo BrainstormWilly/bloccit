@@ -23,6 +23,13 @@ RSpec.describe User, type: :model do
      end
    end
 
+   describe "name and email format" do
+     let(:unformatted_user) { User.create!(name: "jane doe", email:"Jane@Doe.com", password: "password") }
+     it "should be a captitalized name and uncapitalized email" do
+       expect(unformatted_user).to have_attributes(name: "Jane Doe", email:"jane@doe.com")
+     end
+   end
+
    describe "invalid user" do
      let(:user_with_invalid_name) { User.new(name: "", email: "user@bloccit.com") }
      let(:user_with_invalid_email) { User.new(name: "Bloccit User", email: "") }

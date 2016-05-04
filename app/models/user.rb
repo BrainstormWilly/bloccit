@@ -1,6 +1,12 @@
 class User < ActiveRecord::Base
 
-  before_save { self.email = email.downcase }
+  before_save :do_before_save
+
+  private
+  def do_before_save
+    self.email = email.downcase
+    self.name = name.split(" ").collect{ |word| word.capitalize }.join(" ") if self.name
+  end
   #
   validates :name, length: { minimum: 1, maximum: 100 }, presence: true
   validates :password, presence: true, length: { minimum: 6 }, unless: :password_digest
