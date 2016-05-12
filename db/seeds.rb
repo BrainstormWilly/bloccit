@@ -1,13 +1,5 @@
 require 'random_data'
 
-5.times do
-  User.create!(
-    name: RandomData.random_name,
-    email: RandomData.random_email,
-    password: RandomData.random_sentence
-  )
-end
-users = User.all
 
 admin = User.create!(
   name: "Admin",
@@ -21,6 +13,23 @@ member = User.create!(
   email: "member@bloccit.com",
   password: "123456"
 )
+
+moderator = User.create!(
+  name: "Moderator",
+  email: "moderator@bloccit.com",
+  password: "123456",
+  role: "moderator"
+)
+
+5.times do
+  User.create!(
+    name: RandomData.random_name,
+    email: RandomData.random_email,
+    password: RandomData.random_sentence
+  )
+end
+users = User.all
+
 
 15.times do
   Topic.create!(
