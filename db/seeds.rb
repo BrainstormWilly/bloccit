@@ -8,10 +8,18 @@ require 'random_data'
   )
 end
 users = User.all
-user = User.first
-user.update_attributes!(
-  email: "bill@ynoguy.com",
-  password: "ok4bill"
+
+admin = User.create!(
+  name: "Admin",
+  email: "admin@bloccit.com",
+  password: "123456",
+  role: "admin"
+)
+
+member = User.create!(
+  name: "Member",
+  email: "member@bloccit.com",
+  password: "123456"
 )
 
 15.times do
