@@ -32,6 +32,16 @@ RSpec.describe Post, type: :model do
     end
   end
 
+  describe "initial vote on post" do
+    it "has one up vote" do
+      expect(post.votes.count).to eq 1
+      expect(post.votes.first.value).to eq 1
+    end
+    it "updates user votes" do
+      expect(post.user.votes.last).to eq post.votes.first
+    end
+  end
+
   describe "voting" do
 
      before do
