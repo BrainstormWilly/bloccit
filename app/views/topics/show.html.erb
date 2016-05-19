@@ -12,22 +12,35 @@
       <br />
       <p class="lead"><%= @topic.description %></p>
     </p>
-    <% @topic.posts.each do |post| %>
-      <div class="media">
-        <div class="media-body">
-          <h4 class="media-heading">
-            <%= link_to post.title, topic_post_path(@topic, post) %>
-            <%= render partial: "labels/list", locals: { labels: post.labels } %>
-          </h4>
-          <small>
-            submitted <%= time_ago_in_words(post.created_at) %> ago  by <%= post.user.name %><br>
-            <%= post.comments.count %> Comments
-          </small>
+    <div class="row">
+      <div class="col-sm-12">
+        <div>
+          <h3>Comments</h3>
+          <%= render @topic.comments %>
         </div>
+        <% if current_user %>
+          <%= render 'comments/form', comment: Comment.new, commentable: @topic %>
+        <% end %>
       </div>
-    <% end %>
+    </div>
+      <h3>Posts | <%= link_to "New Post", new_topic_post_path(@topic), class: 'btn btn-success' %></h3>
+      <% @topic.posts.each do |post| %>
+        <div class="media">
+          <div class="media-body">
+            <h4 class="media-heading">
+              <%= link_to post.title, topic_post_path(@topic, post) %>
+              <%= render partial: "labels/list", locals: { labels: post.labels } %>
+            </h4>
+            <small>
+              submitted <%= time_ago_in_words(post.created_at) %> ago  by <%= post.user.name %><br>
+              <%= post.comments.count %> Comments
+            </small>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
-  <div class="col-md-4">
+  <!-- <div class="col-md-4">
     <%= link_to "New Post", new_topic_post_path(@topic), class: 'btn btn-success' %>
-  </div>
+  </div> -->
 </div>

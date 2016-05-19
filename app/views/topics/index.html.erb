@@ -9,7 +9,9 @@
             <%= link_to topic.name, topic %>
           </h4>
           <small>
-            <%= topic.description %>
+            <%= topic.description %><br/>
+            <%= topic.comments.count %> Comments<br/>
+            <%= topic.posts.count %> Posts
           </small>
         </div>
       </div>

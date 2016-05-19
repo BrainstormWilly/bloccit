@@ -42,13 +42,22 @@ end
 
 posts = Post.all
 
-100.times do
+50.times do
   Comment.create!(
     user: users.sample,
-    post: posts.sample,
+    commentable: posts.sample,
     body: RandomData.random_paragraph
   )
 end
+
+50.times do
+  Comment.create!(
+    user: users.sample,
+    commentable: topics.sample,
+    body: RandomData.random_paragraph
+  )
+end
+
 
 puts "Seed finished"
 puts "#{User.count} users created"
