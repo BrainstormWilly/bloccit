@@ -61,7 +61,6 @@ RSpec.describe Post, type: :model do
      end
 
      describe "#update_rank" do
- # #28
        it "calculates the correct rank" do
          post.update_rank
          expect(post.rank).to eq (post.points + (post.created_at - Time.new(1970,1,1)) / 1.day.seconds)
@@ -82,17 +81,14 @@ RSpec.describe Post, type: :model do
 
      describe "#new_favorite callback" do
        before do
-         @another_post = topic.posts.create(
-          title: RandomData.random_sentence,
-          body:RandomData.random_paragraph,
-          user: user
-          )
+         @another_post = Post.new(topic:topic, user:user, title:RandomData.random_sentence, body:RandomData.random_paragraph)
        end
         it "creates a new favorite on save" do
           expect(FavoriteMailer).to receive(:new_post).with(@another_post).and_return(double(deliver_now: true))
-          expect( @another_post.favorites.count ).to eq 1
-          expect(@another_post.favorites.first).to eq user.favorites.last
           @another_post.save!
+          expect( @another_post.favorites.count ).to eq 1
+          expect( @another_post.favorites.first.user).to eq user
+
         end
       end
    end
