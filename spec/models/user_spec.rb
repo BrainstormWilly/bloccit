@@ -81,8 +81,10 @@ RSpec.describe User, type: :model do
 
    describe "#favorite_for(post)" do
      before do
-       topic = Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph)
-       @post = topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
+
+       topic = create(:topic)
+       another_user = create(:user)
+       @post = topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: another_user)
      end
 
      it "returns `nil` if the user has not favorited the post" do
@@ -103,4 +105,5 @@ RSpec.describe User, type: :model do
        expect(known_user.avatar_url(48)).to eq(expected_gravatar)
      end
    end
+
 end

@@ -20,7 +20,7 @@ RSpec.describe Comment, type: :model do
 
   describe "after_create" do
      before do
-       @another_comment = create(:comment, post:post, user:user)
+      @another_comment = build(:comment, post:post, user:user)
      end
 
      it "sends an email to users who have favorited the post" do
