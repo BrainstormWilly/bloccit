@@ -21,6 +21,15 @@ RSpec.describe TopicsController, type: :controller do
          get :index
          expect(assigns(:topics)).not_to include(my_private_topic)
        end
+       it "shows public topics" do
+        get :index
+        expect( assigns(:topics).publicly_viewable ).to include(my_topic)
+        expect( assigns(:topics).publicly_viewable ).to_not include(my_private_topic)
+       end
+       it "does not show private topics" do
+        get :index
+        expect( assigns(:topics).privately_viewable ).to be_empty
+       end
     end
 
     describe "GET show" do
@@ -96,6 +105,14 @@ RSpec.describe TopicsController, type: :controller do
         get :index
         expect(assigns(:topics)).to eq([my_topic, my_private_topic])
       end
+
+      it "shows all private/public topics" do
+       get :index
+       expect( assigns(:topics).publicly_viewable ).to include(my_topic)
+       expect( assigns(:topics).publicly_viewable ).to_not include(my_private_topic)
+       expect( assigns(:topics).privately_viewable ).to_not include(my_topic)
+       expect( assigns(:topics).privately_viewable ).to include(my_private_topic)
+      end
     end
 
     describe "GET show" do
@@ -168,6 +185,13 @@ RSpec.describe TopicsController, type: :controller do
       it "assigns Topic.all to topic" do
         get :index
         expect(assigns(:topics)).to eq([my_topic, my_private_topic])
+      end
+      it "shows all private/public topics" do
+       get :index
+       expect( assigns(:topics).publicly_viewable ).to include(my_topic)
+       expect( assigns(:topics).publicly_viewable ).to_not include(my_private_topic)
+       expect( assigns(:topics).privately_viewable ).to_not include(my_topic)
+       expect( assigns(:topics).privately_viewable ).to include(my_private_topic)
       end
     end
 
