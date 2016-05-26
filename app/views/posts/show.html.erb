@@ -1,5 +1,7 @@
 <div>
+  <div class="voter_points">
   <%= render partial: 'votes/voter', locals: {post:@post} %>
+</div>
   <h1>
     <%= @post.title %>
     <small>
@@ -36,15 +38,17 @@
   </div>
   <% end %>
   <div class="col-md-4">
-    <h3>
-      <%= pluralize(@post.points, 'point') %>
-      <div>
-        <small>
-          <%= pluralize(@post.up_votes, 'up vote') %>,
-          <%= pluralize(@post.down_votes, 'down vote') %>
-        </small>
-      </div>
-    </h3>
+    <div class="post_points">
+      <h3>
+        <%= pluralize(@post.points, 'point') %>
+        <div>
+          <small>
+            <%= pluralize(@post.up_votes, 'up vote') %>,
+            <%= pluralize(@post.down_votes, 'down vote') %>
+          </small>
+        </div>
+      </h3>
+    </div>
     <% if current_user %>
        <%= render partial: 'favorites/favorite', locals: { post: @post } %>
      <% end %>
