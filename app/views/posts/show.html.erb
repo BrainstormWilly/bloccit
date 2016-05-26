@@ -1,7 +1,5 @@
 <div>
-  <div class="voter_points">
   <%= render partial: 'votes/voter', locals: {post:@post} %>
-</div>
   <h1>
     <%= @post.title %>
     <small>
@@ -38,12 +36,12 @@
   </div>
   <% end %>
   <div class="col-md-4">
-    <div class="post_points">
+    <div id="post-voter-panel-<%= @post.id %>">
       <h3>
         <%= pluralize(@post.points, 'point') %>
         <div>
           <small>
-            <%= pluralize(@post.up_votes, 'up vote') %>,
+            <%= pluralize(@post.up_votes, 'up vote') %>, 
             <%= pluralize(@post.down_votes, 'down vote') %>
           </small>
         </div>

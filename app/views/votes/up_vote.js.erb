@@ -1,2 +1,2 @@
-$(".post_points").html("<h3><%= pluralize(@post.points, 'point') %><div><small><%= pluralize(@post.up_votes, 'up vote') %>,<%= pluralize(@post.down_votes, 'down vote') %></small></div></h3>")
-$(".voter_points").html("<%= escape_javascript(render partial: 'votes/voter', locals: {post:@post}) %>")
+$("#post-voter-panel-<%= @post.id %>").html("<h3><%= pluralize(@post.points, 'point') %><div><small><%= pluralize(@post.up_votes, 'up vote') %>, <%= pluralize(@post.down_votes, 'down vote') %></small></div></h3>")
+$("#post-voter-points-<%= @post.id %>").html("<strong><%= @post.points %></strong>")
